@@ -72,8 +72,8 @@ public class AirSegmentedControl: UIControl {
         for (index, title) in segments.enumerated() {
             let button = UIButton()
             button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: style.unselectedTextColor]), for: .normal)
-            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.white]), for: .selected)
-            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.white]), for: .highlighted)
+            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: style.selectedTextColor]), for: .selected)
+            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: style.selectedTextColor]), for: .highlighted)
             button.tintColor = style.unselectedTextColor
             button.translatesAutoresizingMaskIntoConstraints = false
             button.tag = index
