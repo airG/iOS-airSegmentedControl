@@ -22,7 +22,7 @@ import UIKit
         }
     }
 
-    /// Controls how quickly the underline moves between sections. This has no effect on the control action.
+    /// Controls how quickly the underline moves between sections. `valueChanged` is always sent immediately.
     @IBInspectable public var animationTime: Double = 0.2
 
     /// When `true`, only sends a `valueChanged` when the value changes to something different.
