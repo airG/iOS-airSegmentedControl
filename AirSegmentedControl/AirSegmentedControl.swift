@@ -6,36 +6,91 @@
 //  Copyright © 2017 airg. All rights reserved.
 //
 
-import Foundation
-
-/// Create or modify the style to customize the `AirSegmentedControl`
-public struct AirSegmentedControlStyle {
-    /// Controls how quickly the underline moves between sections. This has no effect on the control action.
-    public var animationTime: TimeInterval = 0.2
-
-    /// The backgroundColor of the entire control
-    public var backgroundColor: UIColor = .white
-
-    /// The color of the underline
-    public var underlineColor: UIColor = .darkGray
-
-    /// The color of the segment text when selected
-    public var selectedTextColor: UIColor = .black
-
-    /// The text color of all unselected segments
-    public var unselectedTextColor: UIColor = .darkGray
-
-    /// When `true`, only sends a `valueChanged` when the value changes to something different.
-    public var shouldIgnoreDuplicateInputs: Bool = true
-}
+import UIKit
 
 /// Custom UIControl subclass
-public class AirSegmentedControl: UIControl {
-    /// The current style configuration of the control
-    public fileprivate(set) var style: AirSegmentedControlStyle = AirSegmentedControlStyle()
+@IBDesignable
+@objc(AirSegmentedControl) public class AirSegmentedControl: UIControl {
+    public typealias Segment = String
 
+    //MARK: IBInspectables
+    /// Convenience for `@IBInspectable` settings segment titles
+    @IBInspectable public var commaSeparatedSegments: String = "" {
+        didSet {
+            let segs = commaSeparatedSegments.components(separatedBy: ",")
+            segments = segs
+        }
+    }
+
+    /// Controls how quickly the underline moves between sections. This has no effect on the control action.
+    @IBInspectable public var animationTime: Double = 0.2
+
+    /// When `true`, only sends a `valueChanged` when the value changes to something different.
+    @IBInspectable public var shouldIgnoreDuplicateInputs: Bool = true
+
+    /// The color of the underline
+    @IBInspectable public var underlineColor: UIColor = .darkGray {
+        didSet {
+            underline.backgroundColor = underlineColor
+        }
+    }
+
+    /// The height of the underline
+    @IBInspectable public var underlineHeight: Int = 2 {
+        didSet {
+            setupView()
+        }
+    }
+
+    /// The color of the segment text when selected
+    @IBInspectable public var textColorSelected: UIColor = .black {
+        didSet {
+            setupView()
+        }
+    }
+
+    /// The text color of all unselected segments
+    @IBInspectable public var textColorUnselected: UIColor = .darkGray {
+        didSet {
+            setupView()
+        }
+    }
+
+    /// Font
+    public var textFont: UIFont = UIFont.systemFont(ofSize: 16) {
+        didSet {
+            setupView()
+        }
+    }
+
+    /// Whether to show a bottom border
+    @IBInspectable public var bottomBorderVisible: Bool = false {
+        didSet {
+            setupView()
+        }
+    }
+
+    /// The color of the bottom border, if it's visible
+    @IBInspectable public var bottomBorderColor: UIColor = .lightGray {
+        didSet {
+            bottomBorder.backgroundColor = bottomBorderColor
+        }
+    }
+
+    /// The height of the bottom border
+    @IBInspectable public var bottomBorderHeight: Int = 1 {
+        didSet {
+            setupView()
+        }
+    }
+
+    //MARK:- Properties
     /// Array of `Segment` which are being displayed
-    public fileprivate(set) var segments: [String] = []
+    public fileprivate(set) var segments: [String] = [] {
+        didSet {
+            setupView()
+        }
+    }
 
     /// Get the currently selected segment index
     public fileprivate(set) var selectedSegmentIndex: Int = 0
@@ -43,82 +98,38 @@ public class AirSegmentedControl: UIControl {
     fileprivate let underline: UIView = UIView()
     fileprivate var underlineConstraints: [NSLayoutConstraint] = []
 
-    public typealias Segment = String
+    fileprivate let bottomBorder: UIView = UIView()
+
+    //MARK:- Lifecycle
+    override public func awakeFromNib() {
+        super.awakeFromNib()
+
+        setupView()
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+
+        setupView()
+    }
+
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+
+        setupView()
+    }
+
+    //MARK:- Public Interface
 
     /// Configure the control with provided segments and style
     ///
     /// - Parameters:
     ///   - segments: Array of segments to display
     ///   - style: Optional style configuration, if `nil`
-    public func configure(with segments: [Segment], style: AirSegmentedControlStyle = AirSegmentedControlStyle()) {
-        self.style = style
+    public func configure(with segments: [Segment]) {
         self.segments = segments
 
         setupView()
-    }
-
-    fileprivate func setupView() {
-        backgroundColor = style.backgroundColor
-
-        underline.translatesAutoresizingMaskIntoConstraints = false
-        underline.backgroundColor = style.underlineColor
-
-        addSubview(underline)
-
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[line(2)]-(1)-|", options: [], metrics: nil, views: ["line": underline]))
-
-        var previousButton: UIButton?
-
-        for (index, title) in segments.enumerated() {
-            let button = UIButton()
-            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: style.unselectedTextColor]), for: .normal)
-            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: style.selectedTextColor]), for: .selected)
-            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: style.selectedTextColor]), for: .highlighted)
-            button.tintColor = style.unselectedTextColor
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.tag = index
-            button.backgroundColor = .clear
-            button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-            addSubview(button)
-
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[b]|", options: [], metrics: nil, views: ["b": button]))
-
-            switch index {
-            case 0:
-                addConstraint(NSLayoutConstraint(item: underline, attribute: .width, relatedBy: .equal, toItem: button, attribute: .width, multiplier: 1, constant: 0))
-
-                addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[b]", options: [], metrics: nil, views: ["b": button]))
-
-            case 1..<segments.count-1:
-                addConstraint(NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal, toItem: previousButton, attribute: .width, multiplier: 1, constant: 0))
-                addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[previousB][b]", options: [], metrics: nil, views: ["previousB": previousButton!, "b": button]))
-
-            case segments.count-1:
-                addConstraint(NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal, toItem: previousButton, attribute: .width, multiplier: 1, constant: 0))
-                addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[previousB][b]|", options: [], metrics: nil, views: ["previousB": previousButton!, "b": button]))
-
-            default:
-                fatalError("Shouldn't get here")
-            }
-            let centerLine = NSLayoutConstraint(item: underline, attribute: .centerX, relatedBy: .equal, toItem: button, attribute: .centerX, multiplier: 1, constant: 0)
-            centerLine.priority = 250
-            addConstraint(centerLine)
-            underlineConstraints.append(centerLine)
-
-            if selectedSegmentIndex == index {
-                button.isSelected = true
-                constrainBottomLine(index)
-            }
-
-            previousButton = button
-        }
-    }
-
-    @objc fileprivate func buttonTapped(_ sender: UIButton) {
-        if style.shouldIgnoreDuplicateInputs && selectedSegmentIndex == sender.tag {
-            return
-        }
-        select(at: sender.tag)
     }
 
     /// Select an index, sending a `valueChanged` event.
@@ -142,6 +153,92 @@ public class AirSegmentedControl: UIControl {
         sendActions(for: .valueChanged)
     }
 
+    //MARK:- Private Methods
+    fileprivate func setupView() {
+        for view in subviews {
+            view.removeFromSuperview()
+        }
+
+        underlineConstraints = []
+
+        underline.translatesAutoresizingMaskIntoConstraints = false
+        underline.backgroundColor = underlineColor
+
+        addSubview(underline)
+
+        if bottomBorderVisible {
+            bottomBorder.translatesAutoresizingMaskIntoConstraints = false
+            bottomBorder.backgroundColor = bottomBorderColor
+            addSubview(bottomBorder)
+
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[border]|", options: [], metrics: nil, views: ["border": bottomBorder]))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[border(borderHeight)]|", options: [], metrics: ["borderHeight": bottomBorderHeight], views: ["border": bottomBorder]))
+
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[line(height)]-(borderHeight)-|", options: [], metrics: ["height": underlineHeight, "borderHeight": bottomBorderHeight], views: ["line": underline]))
+        } else {
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[line(height)]|", options: [], metrics: ["height": underlineHeight], views: ["line": underline]))
+        }
+
+        var previousButton: UIButton?
+
+        for (index, title) in segments.enumerated() {
+            let button = UIButton()
+            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColorUnselected]), for: .normal)
+            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColorSelected]), for: .selected)
+            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColorSelected]), for: .highlighted)
+            button.tintColor = textColorUnselected
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.tag = index
+            button.backgroundColor = .clear
+            button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+            addSubview(button)
+
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[b]|", options: [], metrics: nil, views: ["b": button]))
+
+            switch index {
+            case let n where n == 0 && segments.count == 1:
+                addConstraint(NSLayoutConstraint(item: underline, attribute: .width, relatedBy: .equal, toItem: button, attribute: .width, multiplier: 1, constant: 0))
+
+                addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[b]|", options: [], metrics: nil, views: ["b": button]))
+
+            case 0:
+                addConstraint(NSLayoutConstraint(item: underline, attribute: .width, relatedBy: .equal, toItem: button, attribute: .width, multiplier: 1, constant: 0))
+
+                addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[b]", options: [], metrics: nil, views: ["b": button]))
+
+            case 1..<segments.count-1:
+                addConstraint(NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal, toItem: previousButton, attribute: .width, multiplier: 1, constant: 0))
+                addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[previousB][b]", options: [], metrics: nil, views: ["previousB": previousButton!, "b": button]))
+
+            case segments.count-1:
+                addConstraint(NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal, toItem: previousButton, attribute: .width, multiplier: 1, constant: 0))
+                addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[previousB][b]|", options: [], metrics: nil, views: ["previousB": previousButton!, "b": button]))
+
+            default:
+                fatalError("Shouldn't get here")
+            }
+
+            let centerLine = NSLayoutConstraint(item: underline, attribute: .centerX, relatedBy: .equal, toItem: button, attribute: .centerX, multiplier: 1, constant: 0)
+            centerLine.priority = 250
+            addConstraint(centerLine)
+            underlineConstraints.append(centerLine)
+
+            if selectedSegmentIndex == index {
+                button.isSelected = true
+                constrainBottomLine(index)
+            }
+
+            previousButton = button
+        }
+    }
+
+    @objc fileprivate func buttonTapped(_ sender: UIButton) {
+        if shouldIgnoreDuplicateInputs && selectedSegmentIndex == sender.tag {
+            return
+        }
+        select(at: sender.tag, animated: true)
+    }
+
     fileprivate func constrainBottomLine(_ toIndex: Int, animated: Bool = true) {
         self.layoutIfNeeded()
 
@@ -152,9 +249,9 @@ public class AirSegmentedControl: UIControl {
                 constraint.priority = 750
             }
         }
-
+        
         if animated {
-            UIView.animate(withDuration: style.animationTime, animations: {
+            UIView.animate(withDuration: animationTime, animations: {
                 self.layoutIfNeeded()
             })
         } else {
