@@ -31,6 +31,7 @@
 		747712621E576EDB00B1123F /* AirSegmentedControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirSegmentedControlTests.swift; sourceTree = "<group>"; };
 		747712641E576EDB00B1123F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7477126E1E576F8F00B1123F /* AirSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirSegmentedControl.swift; sourceTree = "<group>"; };
+		748DF1491E5BB07D000E90C1 /* InspectableAirSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectableAirSegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +76,7 @@
 			children = (
 				747712571E576EDB00B1123F /* AirSegmentedControl.h */,
 				7477126E1E576F8F00B1123F /* AirSegmentedControl.swift */,
+				748DF1491E5BB07D000E90C1 /* InspectableAirSegmentedControl.swift */,
 				747712581E576EDB00B1123F /* Info.plist */,
 			);
 			path = AirSegmentedControl;

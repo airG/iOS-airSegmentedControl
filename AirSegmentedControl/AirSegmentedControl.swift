@@ -10,12 +10,12 @@ import UIKit
 
 /// Custom UIControl subclass
 @IBDesignable
-@objc(AirSegmentedControl) public class AirSegmentedControl: UIControl {
+@objc(AirSegmentedControl) open class AirSegmentedControl: UIControl {
     public typealias Segment = String
 
     //MARK: IBInspectables
     /// Convenience for `@IBInspectable` settings segment titles
-    @IBInspectable public var commaSeparatedSegments: String = "" {
+    @IBInspectable open var commaSeparatedSegments: String = "" {
         didSet {
             let segs = commaSeparatedSegments.components(separatedBy: ",")
             segments = segs
@@ -23,62 +23,62 @@ import UIKit
     }
 
     /// Controls how quickly the underline moves between sections. `valueChanged` is always sent immediately.
-    @IBInspectable public var animationTime: Double = 0.2
+    @IBInspectable open var animationTime: Double = 0.2
 
     /// When `true`, only sends a `valueChanged` when the value changes to something different.
-    @IBInspectable public var shouldIgnoreDuplicateInputs: Bool = true
+    @IBInspectable open var shouldIgnoreDuplicateInputs: Bool = true
 
     /// The color of the underline
-    @IBInspectable public var underlineColor: UIColor = .darkGray {
+    @IBInspectable open var underlineColor: UIColor = .darkGray {
         didSet {
             underline.backgroundColor = underlineColor
         }
     }
 
     /// The height of the underline
-    @IBInspectable public var underlineHeight: Int = 2 {
+    @IBInspectable open var underlineHeight: Int = 2 {
         didSet {
             setupView()
         }
     }
 
     /// The color of the segment text when selected
-    @IBInspectable public var textColorSelected: UIColor = .black {
+    @IBInspectable open var textColorSelected: UIColor = .black {
         didSet {
             setupView()
         }
     }
 
     /// The text color of all unselected segments
-    @IBInspectable public var textColorUnselected: UIColor = .darkGray {
+    @IBInspectable open var textColorUnselected: UIColor = .darkGray {
         didSet {
             setupView()
         }
     }
 
     /// Font
-    public var textFont: UIFont = UIFont.systemFont(ofSize: 16) {
+    @IBInspectable open var textFont: UIFont = UIFont.systemFont(ofSize: 16) {
         didSet {
             setupView()
         }
     }
 
     /// Whether to show a bottom border
-    @IBInspectable public var bottomBorderVisible: Bool = false {
+    @IBInspectable open var bottomBorderVisible: Bool = false {
         didSet {
             setupView()
         }
     }
 
     /// The color of the bottom border, if it's visible
-    @IBInspectable public var bottomBorderColor: UIColor = .lightGray {
+    @IBInspectable open var bottomBorderColor: UIColor = .lightGray {
         didSet {
             bottomBorder.backgroundColor = bottomBorderColor
         }
     }
 
     /// The height of the bottom border
-    @IBInspectable public var bottomBorderHeight: Int = 1 {
+    @IBInspectable open var bottomBorderHeight: Int = 1 {
         didSet {
             setupView()
         }
@@ -86,14 +86,14 @@ import UIKit
 
     //MARK:- Properties
     /// Array of `Segment` which are being displayed
-    public fileprivate(set) var segments: [String] = [] {
+    open fileprivate(set) var segments: [String] = [] {
         didSet {
             setupView()
         }
     }
 
     /// Get the currently selected segment index
-    public fileprivate(set) var selectedSegmentIndex: Int = 0
+    open fileprivate(set) var selectedSegmentIndex: Int = 0
 
     fileprivate let underline: UIView = UIView()
     fileprivate var underlineConstraints: [NSLayoutConstraint] = []
@@ -101,7 +101,7 @@ import UIKit
     fileprivate let bottomBorder: UIView = UIView()
 
     //MARK:- Lifecycle
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
 
         setupView()
@@ -126,7 +126,7 @@ import UIKit
     /// - Parameters:
     ///   - segments: Array of segments to display
     ///   - style: Optional style configuration, if `nil`
-    public func configure(with segments: [Segment]) {
+    open func configure(with segments: [Segment]) {
         self.segments = segments
 
         setupView()
@@ -137,7 +137,7 @@ import UIKit
     /// - Parameters:
     ///   - index: Index to select
     ///   - animated: Should the selection be animated,
-    public func select(at index: Int, animated: Bool = true) {
+    open func select(at index: Int, animated: Bool = true) {
         selectedSegmentIndex = index
 
         for button in subviews where button is UIButton {
