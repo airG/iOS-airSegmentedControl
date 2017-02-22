@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import AirSegmentedControl
 
-// Include this in your project to gain @IBInspectable
+/// Include this in your project to gain @IBInspectable
 class InspectableAirSegmentedControl: AirSegmentedControl {
-    @IBInspectable public var commaSeparatedSegments: String {
+    @IBInspectable override open var commaSeparatedSegments: String {
         get {
             return super.commaSeparatedSegments
         }
@@ -20,7 +21,7 @@ class InspectableAirSegmentedControl: AirSegmentedControl {
     }
 
     /// Controls how quickly the underline moves between sections. `valueChanged` is always sent immediately.
-    @IBInspectable public var animationTime: Double {
+    @IBInspectable override open var animationTime: Double {
         get {
             return super.animationTime
         }
@@ -30,7 +31,7 @@ class InspectableAirSegmentedControl: AirSegmentedControl {
     }
 
     /// When `true`, only sends a `valueChanged` when the value changes to something different.
-    @IBInspectable public var shouldIgnoreDuplicateInputs: Bool {
+    @IBInspectable override open var shouldIgnoreDuplicateInputs: Bool {
         get {
             return super.shouldIgnoreDuplicateInputs
         }
@@ -40,7 +41,7 @@ class InspectableAirSegmentedControl: AirSegmentedControl {
     }
 
     /// The color of the underline
-    @IBInspectable public var underlineColor: UIColor {
+    @IBInspectable override open var underlineColor: UIColor {
         get {
             return super.underlineColor
         }
@@ -50,7 +51,7 @@ class InspectableAirSegmentedControl: AirSegmentedControl {
     }
 
     /// The height of the underline
-    @IBInspectable public var underlineHeight: Int {
+    @IBInspectable override open var underlineHeight: Int {
         get {
             return super.underlineHeight
         }
@@ -60,7 +61,7 @@ class InspectableAirSegmentedControl: AirSegmentedControl {
     }
 
     /// The color of the segment text when selected
-    @IBInspectable public var textColorSelected: UIColor {
+    @IBInspectable override open var textColorSelected: UIColor {
         get {
             return super.textColorSelected
         }
@@ -70,7 +71,7 @@ class InspectableAirSegmentedControl: AirSegmentedControl {
     }
 
     /// The text color of all unselected segments
-    @IBInspectable public var textColorUnselected: UIColor {
+    @IBInspectable override open var textColorUnselected: UIColor {
         get {
             return super.textColorUnselected
         }
@@ -79,18 +80,8 @@ class InspectableAirSegmentedControl: AirSegmentedControl {
         }
     }
 
-    /// Font
-    public var textFont: UIFont {
-        get {
-            return super.textFont
-        }
-        set {
-            super.textFont = newValue
-        }
-    }
-
     /// Whether to show a bottom border
-    @IBInspectable public var bottomBorderVisible: Bool {
+    @IBInspectable override open var bottomBorderVisible: Bool {
         get {
             return super.bottomBorderVisible
         }
@@ -100,7 +91,7 @@ class InspectableAirSegmentedControl: AirSegmentedControl {
     }
 
     /// The color of the bottom border, if it's visible
-    @IBInspectable public var bottomBorderColor: UIColor {
+    @IBInspectable override open var bottomBorderColor: UIColor {
         get {
             return super.bottomBorderColor
         }
@@ -110,7 +101,7 @@ class InspectableAirSegmentedControl: AirSegmentedControl {
     }
 
     /// The height of the bottom border
-    @IBInspectable public var bottomBorderHeight: Int {
+    @IBInspectable override open var bottomBorderHeight: Int {
         get {
             return super.bottomBorderHeight
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74181C071E5E208900775E9A /* AirSegmentedControl.swift in Headers */ = {isa = PBXBuildFile; fileRef = 7477126E1E576F8F00B1123F /* AirSegmentedControl.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		7477125E1E576EDB00B1123F /* AirSegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747712541E576EDB00B1123F /* AirSegmentedControl.framework */; };
 		747712631E576EDB00B1123F /* AirSegmentedControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747712621E576EDB00B1123F /* AirSegmentedControlTests.swift */; };
 		747712651E576EDB00B1123F /* AirSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 747712571E576EDB00B1123F /* AirSegmentedControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -99,6 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				747712651E576EDB00B1123F /* AirSegmentedControl.h in Headers */,
+				74181C071E5E208900775E9A /* AirSegmentedControl.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +332,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N7T3L4Z9JM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -340,6 +342,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.airg.AirSegmentedControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -352,7 +355,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N7T3L4Z9JM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -362,6 +365,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.airg.AirSegmentedControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
