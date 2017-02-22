@@ -10,12 +10,12 @@ import UIKit
 
 /// Custom UIControl subclass
 @IBDesignable
-@objc(AirSegmentedControl) open class AirSegmentedControl: UIControl {
+open class AirSegmentedControl: UIControl {
     public typealias Segment = String
 
     //MARK: IBInspectables
     /// Convenience for `@IBInspectable` settings segment titles
-    @IBInspectable @objc open var commaSeparatedSegments: String = "" {
+    @IBInspectable open var commaSeparatedSegments: String = "" {
         didSet {
             let segs = commaSeparatedSegments.components(separatedBy: ",")
             segments = segs
@@ -23,62 +23,62 @@ import UIKit
     }
 
     /// Controls how quickly the underline moves between sections. `valueChanged` is always sent immediately.
-    @IBInspectable @objc open var animationTime: Double = 0.2
+    @IBInspectable open var animationTime: Double = 0.2
 
     /// When `true`, only sends a `valueChanged` when the value changes to something different.
-    @IBInspectable @objc open var shouldIgnoreDuplicateInputs: Bool = true
+    @IBInspectable open var shouldIgnoreDuplicateInputs: Bool = true
 
     /// The color of the underline
-    @IBInspectable @objc open var underlineColor: UIColor = .darkGray {
+    @IBInspectable open var underlineColor: UIColor = .darkGray {
         didSet {
             underline.backgroundColor = underlineColor
         }
     }
 
     /// The height of the underline
-    @IBInspectable @objc open var underlineHeight: Int = 2 {
+    @IBInspectable open var underlineHeight: Int = 2 {
         didSet {
             setupView()
         }
     }
 
     /// The color of the segment text when selected
-    @IBInspectable @objc open var textColorSelected: UIColor = .black {
+    @IBInspectable open var textColorSelected: UIColor = .black {
         didSet {
             setupView()
         }
     }
 
     /// The text color of all unselected segments
-    @IBInspectable @objc open var textColorUnselected: UIColor = .darkGray {
+    @IBInspectable open var textColorUnselected: UIColor = .darkGray {
         didSet {
             setupView()
         }
     }
 
     /// Font
-    @IBInspectable @objc open var textFont: UIFont = UIFont.systemFont(ofSize: 16) {
+    @IBInspectable open var textFont: UIFont = UIFont.systemFont(ofSize: 16) {
         didSet {
             setupView()
         }
     }
 
     /// Whether to show a bottom border
-    @IBInspectable @objc open var bottomBorderVisible: Bool = false {
+    @IBInspectable open var bottomBorderVisible: Bool = false {
         didSet {
             setupView()
         }
     }
 
     /// The color of the bottom border, if it's visible
-    @IBInspectable @objc open var bottomBorderColor: UIColor = .lightGray {
+    @IBInspectable open var bottomBorderColor: UIColor = .lightGray {
         didSet {
             bottomBorder.backgroundColor = bottomBorderColor
         }
     }
 
     /// The height of the bottom border
-    @IBInspectable @objc open var bottomBorderHeight: Int = 1 {
+    @IBInspectable open var bottomBorderHeight: Int = 1 {
         didSet {
             setupView()
         }
