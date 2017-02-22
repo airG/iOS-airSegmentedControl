@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		74181C071E5E208900775E9A /* AirSegmentedControl.swift in Headers */ = {isa = PBXBuildFile; fileRef = 7477126E1E576F8F00B1123F /* AirSegmentedControl.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		7477125E1E576EDB00B1123F /* AirSegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747712541E576EDB00B1123F /* AirSegmentedControl.framework */; };
 		747712631E576EDB00B1123F /* AirSegmentedControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747712621E576EDB00B1123F /* AirSegmentedControlTests.swift */; };
 		747712651E576EDB00B1123F /* AirSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 747712571E576EDB00B1123F /* AirSegmentedControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -100,7 +99,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				747712651E576EDB00B1123F /* AirSegmentedControl.h in Headers */,
-				74181C071E5E208900775E9A /* AirSegmentedControl.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
