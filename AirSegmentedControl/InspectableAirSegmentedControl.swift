@@ -109,4 +109,26 @@ class InspectableAirSegmentedControl: AirSegmentedControl {
             super.bottomBorderHeight = newValue
         }
     }
+
+    // These are required to fix build issues, no benefit having it here otherwise
+    override var textFont: UIFont {
+        get {
+            return super.textFont
+        }
+        set {
+            super.textFont = newValue
+        }
+    }
+
+    override var segments: [String] {
+        get {
+            return super.segments
+        }
+    }
+
+    override var selectedSegmentIndex: Int {
+        get {
+            return super.selectedSegmentIndex
+        }
+    }
 }
