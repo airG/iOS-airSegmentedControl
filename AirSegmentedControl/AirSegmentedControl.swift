@@ -101,18 +101,21 @@ open class AirSegmentedControl: UIControl {
     fileprivate let bottomBorder: UIView = UIView()
 
     //MARK:- Lifecycle
+    /// Calls `setupView()`
     override open func awakeFromNib() {
         super.awakeFromNib()
 
         setupView()
     }
 
+    /// Calls `setupView()`
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
         setupView()
     }
 
+    /// Calls `setupView()`
     override public init(frame: CGRect) {
         super.init(frame: frame)
 
