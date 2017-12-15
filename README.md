@@ -11,6 +11,8 @@ A UIControl subclass that draws itself based on the number of segments provided.
 
 Installation is best managed using Carthage. Add `github "airg/iOS-airSegmentedControl"` to your cartfile and run `carthage install`, see [Carthage Installation Guide](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
 
+You can also install using Cocoapods, add `pod 'airSegmentedControl', '~> 1.0.10'`  to your podfile.
+
 To get `IBDesignable` and `IBInspectable` to work in Interface Builder, add the [InspectableAirSegmentedControl file](https://github.com/airG/iOS-airSegmentedControl/blob/master/AirSegmentedControl/InspectableAirSegmentedControl.swift) to your project and use the `InspectableAirSegmentedControl` subclass.
 
 ## Documentation
