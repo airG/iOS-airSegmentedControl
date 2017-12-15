@@ -2,6 +2,7 @@
 
 [![Documentation](https://github.com/airG/iOS-AirSegmentedControl/blob/master/docs/badge.svg)](https://airg.github.io/iOS-AirSegmentedControl/)
 [![Documentation](badge.svg)](https://airg.github.io/iOS-AirSegmentedControl/)
+[![Documentation](docs/badge.svg)](https://airg.github.io/iOS-AirSegmentedControl/)
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
