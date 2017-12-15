@@ -186,9 +186,9 @@ open class AirSegmentedControl: UIControl {
 
         for (index, title) in segments.enumerated() {
             let button = UIButton()
-            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColorUnselected]), for: .normal)
-            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColorSelected]), for: .selected)
-            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSFontAttributeName: textFont, NSForegroundColorAttributeName: textColorSelected]), for: .highlighted)
+            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: textFont, NSAttributedStringKey.foregroundColor: textColorUnselected]), for: .normal)
+            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: textFont, NSAttributedStringKey.foregroundColor: textColorSelected]), for: .selected)
+            button.setAttributedTitle(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: textFont, NSAttributedStringKey.foregroundColor: textColorSelected]), for: .highlighted)
             button.tintColor = textColorUnselected
             button.translatesAutoresizingMaskIntoConstraints = false
             button.tag = index
@@ -222,7 +222,7 @@ open class AirSegmentedControl: UIControl {
             }
 
             let centerLine = NSLayoutConstraint(item: underline, attribute: .centerX, relatedBy: .equal, toItem: button, attribute: .centerX, multiplier: 1, constant: 0)
-            centerLine.priority = 250
+            centerLine.priority = UILayoutPriority(rawValue: 250)
             addConstraint(centerLine)
             underlineConstraints.append(centerLine)
 
@@ -247,9 +247,9 @@ open class AirSegmentedControl: UIControl {
 
         for (index, constraint) in self.underlineConstraints.enumerated() {
             if index != toIndex {
-                constraint.priority = 250
+                constraint.priority = UILayoutPriority(rawValue: 250)
             } else {
-                constraint.priority = 750
+                constraint.priority = UILayoutPriority(rawValue: 750)
             }
         }
         
