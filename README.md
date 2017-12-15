@@ -1,26 +1,26 @@
-# airSegmentedControl
+# AirSegmentedControl
 
-[![Documentation](https://github.com/airG/iOS-airSegmentedControl/blob/master/docs/badge.svg)](https://airg.github.io/ios-AirSegmentedControl/)
+[![Documentation](https://github.com/airG/iOS-AirSegmentedControl/blob/master/docs/badge.svg)](https://airg.github.io/iOS-AirSegmentedControl/)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 A UIControl subclass that draws itself based on the number of segments provided.
 
 ![example](AirSegmentedControlExample.gif)
 
-## How to use airSegmentedControl
+## How to use AirSegmentedControl
 
-Installation is best managed using Carthage. Add `github "airg/ios-AirSegmentedControl"` to your cartfile and run `carthage install`, see [Carthage Installation Guide](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
+Installation is best managed using Carthage. Add `github "airg/iOS-AirSegmentedControl"` to your cartfile and run `carthage install`, see [Carthage Installation Guide](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
 
-To get `IBDesignable` and `IBInspectable` to work in Interface Builder, add the [InspectableAirSegmentedControl file](https://github.com/airG/ios-AirSegmentedControl/blob/master/AirSegmentedControl/InspectableAirSegmentedControl.swift) to your project and use the `InspectableAirSegmentedControl` subclass.
+To get `IBDesignable` and `IBInspectable` to work in Interface Builder, add the [InspectableAirSegmentedControl file](https://github.com/airG/iOS-AirSegmentedControl/blob/master/AirSegmentedControl/InspectableAirSegmentedControl.swift) to your project and use the `InspectableAirSegmentedControl` subclass.
 
 ## Documentation
 
-Check out the [documentation](https://airg.github.io/ios-AirSegmentedControl/). All calls should also be documented in the generated Swift interface.
+Check out the [documentation](https://airg.github.io/iOS-AirSegmentedControl/). All calls should also be documented in the generated Swift interface.
 
 
 ## How it's made
 
-airSegmentedControl is currently written in Swift 4 with Xcode 9.2.
+AirSegmentedControl is currently written in Swift 4 with Xcode 9.2.
 
 Documentation is generated using [Jazzy](https://github.com/realm/jazzy), a very useful tool for generating pretty docs.
 
