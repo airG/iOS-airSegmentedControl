@@ -1,10 +1,9 @@
 # AirSegmentedControl
 
 [![Documentation](https://github.com/airG/iOS-AirSegmentedControl/blob/master/docs/badge.svg)](https://airg.github.io/iOS-AirSegmentedControl/)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Documentation](/airG/iOS-AirSegmentedControl/blob/master/docs/badge.svg)](https://airg.github.io/iOS-AirSegmentedControl/)
+[![Documentation](badge.svg)](https://airg.github.io/iOS-AirSegmentedControl/)
 
-[Doc2](https://raw.githubusercontent.com/airG/iOS-AirSegmentedControl/master/docs/badge.svg)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 A UIControl subclass that draws itself based on the number of segments provided.
 
